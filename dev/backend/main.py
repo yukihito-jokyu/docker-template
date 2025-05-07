@@ -6,7 +6,7 @@ app = FastAPI()
 # CORS設定（React側からアクセスできるようにする）
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # ReactのURL
+    allow_origins=["*"],  # ReactのURL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -15,3 +15,7 @@ app.add_middleware(
 @app.get("/api/hello")
 async def hello():
     return {"message": "Hello from FastAPI!"}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8080)
